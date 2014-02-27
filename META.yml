@@ -34,6 +34,8 @@ resources:
   bugtracker: https://github.com/jshy/Test-mongod/issues
   homepage: https://github.com/jshy/Test-mongod
   repository: https://github.com/jshy/Test-mongod.git
-version: 0.02
+version: 0.03
 x_contributors:
+  - 'Alexandr Ciornii <alexchorny@gmail.com>'
   - 'Jesse Shy <jesse@classmith.com>'
+  - 'jshy <jesse@holdtheplan.com>'

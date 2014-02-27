@@ -1,6 +1,6 @@
 package Test::mongod;
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 use Moose;
 use File::Temp qw(tempdir);
@@ -10,6 +10,8 @@ use Hash::Merge qw(merge);
 use Time::HiRes qw(sleep);
 use POSIX qw(SIGTERM);
 use FindBin qw($Bin);
+
+use File::Which 'which';
 
 has config => (
         is => 'ro',
@@ -72,7 +74,7 @@ has 'pid' => (
 
 sub _build_mongod {
         my $self = shift;
-        my $mongod = `which mongod 2> /dev/null`;
+        my $mongod = which('mongod');
         chomp $mongod if $mongod;
         undef $mongod unless -x $mongod;
         return $mongod;
@@ -93,7 +95,8 @@ around BUILDARGS => sub {
     
 
 sub BUILD {
-        my $self = shift;       
+        my $self = shift;
+        return unless $self->mongod;
         my $pid = fork;
         die "fork failed:$!" unless defined $pid;
 
