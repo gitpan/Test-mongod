@@ -10,4 +10,5 @@ cpanfile
 dist.ini
 lib/Test/mongod.pm
 t/basic.t
+t/etc/mongo.conf
 t/release-pod-syntax.t
