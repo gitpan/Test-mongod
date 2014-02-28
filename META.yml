@@ -24,6 +24,7 @@ no_index:
 requires:
   Config::ZOMG: 0
   File::Temp: 0
+  File::Which: 0
   FindBin: 0
   Hash::Merge: 0
   Net::EmptyPort: 0
@@ -34,7 +35,7 @@ resources:
   bugtracker: https://github.com/jshy/Test-mongod/issues
   homepage: https://github.com/jshy/Test-mongod
   repository: https://github.com/jshy/Test-mongod.git
-version: 0.03
+version: 0.04
 x_contributors:
   - 'Alexandr Ciornii <alexchorny@gmail.com>'
   - 'Jesse Shy <jesse@classmith.com>'
