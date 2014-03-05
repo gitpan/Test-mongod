@@ -1,6 +1,6 @@
 package Test::mongod;
 
-our $VERSION = '0.04';
+our $VERSION = '0.05';
 
 use Moose;
 use File::Temp qw(tempdir);
@@ -13,6 +13,7 @@ use FindBin qw($Bin);
 
 use File::Which 'which';
 
+
 has config => (
         is => 'ro',
         isa => 'HashRef',
@@ -24,7 +25,6 @@ has config => (
 sub _build_config {
         my ($self, $path_to) = @_;
         $path_to //= "$Bin/etc/mongod.conf";
-        
         return unless -f $path_to;
         
         my $config = Config::ZOMG->open($path_to) or die "Counld not open config";
@@ -85,8 +85,8 @@ around BUILDARGS => sub {
     my $class = shift;
     my $args = shift;
     
-    my $config = (exists ${$args}{config}) ? $args->{config} : $class->_build_config($args->{config_file});
-     
+    my $config = $class->_build_config($args->{config_file});
+    $config = merge($args->{config}, $config) if ($args->{config});
     my %args = %{ merge($args, $config) } if $config; 
     $args{config} = $config if $config;
     return $class->$orig(%args);
